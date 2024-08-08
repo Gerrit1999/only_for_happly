@@ -7,12 +7,13 @@
 # cron "15 20 6,15 * * *" script-path=xxx.py,tag=匹配cron用
 # const $ = new Env('百度贴吧')
 
-#变量为百度贴吧登录后的ck全部 变量名为tieback
+# 变量为百度贴吧登录后的ck全部 变量名为tieback
 
 import hashlib
-import re,os
-
+import re
+import os
 import requests
+import notify
 
 
 class Tieba:
@@ -106,7 +107,7 @@ class Tieba:
                 msg = f"帐号信息: {user_name}\n{self.sign(session, tb_name_list, tbs)}"
             else:
                 msg = f"帐号信息: {user_name}\n签到状态: Cookie 可能过期"
-            msg_all += msg + "\n\n"
+            msg_all += msg + "\n"
         return msg_all
 
 
@@ -116,14 +117,17 @@ def string_to_dict(s):
     result_dict['cookie'] = parts[0]
     return result_dict
 
+
 def start():
     s = os.getenv("tieback").split('#')
     print(f'共{len(s)}个账号')
     for i in range(len(s)):
-        item =s[i]
+        item = s[i]
         _check_items = [string_to_dict(item)]
         result = Tieba(check_items=_check_items).main()
         print(result)
+        notify.send('贴吧签到', result)
+
 
 if __name__ == "__main__":
     start()
