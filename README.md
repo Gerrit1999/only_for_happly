@@ -15,11 +15,11 @@
 
 国外机子
 ```
-ql repo https://github.com/wd210010/only_for_happly.git "" "backup" "" ""
+ql repo https://github.com/Gerrit1999/only_for_happly.git "" "backup" "" ""
 ```
 国内机子
 ```
-ql repo https://ghproxy.com/https://github.com/wd210010/only_for_happly.git "" "backup" "" ""
+ql repo https://mirror.ghproxy.com/https://github.com/Gerrit1999/only_for_happly.git "" "backup" "" ""
 ```
 - [x] 脚本排错
 
