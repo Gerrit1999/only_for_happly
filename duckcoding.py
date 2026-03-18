@@ -43,10 +43,12 @@ def sign_in(account):
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             "Referer": f"{BASE_URL}/console/personal",
+            "Origin": BASE_URL,
+            "Content-Type": "application/json",
             "New-Api-User": user_id,
         }
         cookies = {"session": session}
-        resp = requests.post(CHECKIN_URL, headers=headers, cookies=cookies, timeout=15)
+        resp = requests.post(CHECKIN_URL, headers=headers, cookies=cookies, json={}, timeout=15)
         try:
             data = resp.json()
         except ValueError:
