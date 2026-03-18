@@ -47,7 +47,13 @@ def sign_in(account):
         }
         cookies = {"session": session}
         resp = requests.post(CHECKIN_URL, headers=headers, cookies=cookies, timeout=15)
-        data = resp.json()
+        try:
+            data = resp.json()
+        except ValueError:
+            err = f"接口返回非JSON (status={resp.status_code}): {resp.text[:200] if resp.text else '空响应'}"
+            print(err)
+            notify.send("DuckCoding签到", err)
+            return
 
         if data.get("success"):
             msg = data.get("message", "签到成功")
